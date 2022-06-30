@@ -15,31 +15,33 @@ interface ITodo {
 
 export function CreateTodo ({ fixed }: ITodoProps) {
 
-    const { setData } = useContext(AppContext)
+    const { todos, setData } = useContext(AppContext)
     const [newTodo, setNewTodo] = useState('')
-
-    const handleCreateTodo = function () {
-        event?.preventDefault()
-        console.log('criado')
-    }
 
     const handleChangeTodo = function (event: React.ChangeEvent<HTMLInputElement>) {
         setNewTodo(event?.target.value)        
     }
 
     const handleCreate = function () {
+        event?.preventDefault()
+
         const todo: ITodo = {
             uid: new Date().toISOString(),
             task: newTodo,
             done: false
         }
-        setData([todo])
+
+        setNewTodo('')
+        const listTodos = todos
+        listTodos.push(todo)
+
+        setData(listTodos)
     }
 
     return (
         <form 
             className={`${styles.formTodo} ${fixed ? styles.fixed : ''}`}            
-            onSubmit={handleCreateTodo}
+            onSubmit={handleCreate}
         >
             <input
                 value={newTodo}

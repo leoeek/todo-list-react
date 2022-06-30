@@ -29,7 +29,7 @@ export function AppProvider ({ children }: IProviderProps) {
     }, [])
 
     const setData = (data: ITodo[]) => {
-        setTodos([...todos, ...data])
+        setTodos([...data])
     }
 
     return <AppContext.Provider value={{ todos, setData }}>{ children }</AppContext.Provider>

@@ -11,9 +11,8 @@ interface ITodo {
 }
 
 export function List () {
-    const { todos } = useContext(AppContext)    
+    const { todos, setData } = useContext(AppContext)    
 
-    const [todos1, setTodos] = useState<ITodo[]>([]);
     const [countCreated, setCountCreated] = useState(0)
     const [countDone, setCountDone] = useState(0)
 
@@ -22,42 +21,25 @@ export function List () {
         const i = listTodos.findIndex(item => item.uid === uid)
         listTodos[i].done = !listTodos[i].done
 
-        setTodos([...listTodos]);
+        setData(listTodos)
     }
     
     const handleRemove = (uid: string) => {
         const newList = todos.filter((todo) => todo.uid !== uid)
-        setTodos([...newList])
+        setData([...newList])
+    }
+
+    const getCountDone = () => {
+        return todos.filter((todo) => todo.done == true).length
     }
 
     useEffect(() => {
         setCountCreated(todos.length)
+        setCountDone(getCountDone())
 
         const totalDone = todos.filter((todo) => todo.done == true)
         setCountDone(totalDone.length)
     }, [todos])
-
-    // useEffect(() => {
-    //     const todo: ITodo[] =  [
-    //         {
-    //             uid: '239393',
-    //             task: 'Teste',
-    //             done: false
-    //         },
-    //         {
-    //             uid: '239393111',
-    //             task: 'Teste 22',
-    //             done: false
-    //         },
-    //         {
-    //             uid: '2223',
-    //             task: 'Teste 3',
-    //             done: true
-    //         },
-    //     ]
-
-    //     setTodos(todo);
-    // }, [])
 
     return (
         <main className={styles.container}>
