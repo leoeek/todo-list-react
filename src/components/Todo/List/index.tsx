@@ -4,12 +4,6 @@ import { AppContext } from '../../../context';
 import { Item } from '../Item';
 import styles from './Styles.module.css'
 
-interface ITodo {
-    uid: string;
-    task: string;
-    done: boolean;
-}
-
 export function List () {
     const { todos, setData } = useContext(AppContext)    
 
@@ -36,9 +30,6 @@ export function List () {
     useEffect(() => {
         setCountCreated(todos.length)
         setCountDone(getCountDone())
-
-        const totalDone = todos.filter((todo) => todo.done == true)
-        setCountDone(totalDone.length)
     }, [todos])
 
     return (

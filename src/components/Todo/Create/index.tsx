@@ -48,7 +48,10 @@ export function CreateTodo ({ fixed }: ITodoProps) {
                 onChange={handleChangeTodo}
                 placeholder="Crie uma nova tarefa"
             />
-            <button onClick={() => handleCreate()}>
+            <button 
+                disabled={newTodo.length === 0}
+                onClick={() => handleCreate()}
+            >
                 Criar 
             </button>
         </form>

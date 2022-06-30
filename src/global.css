@@ -17,6 +17,17 @@
     --red-500: #E25858;
 }
 
+@media (max-width: 1080px) {
+    html {
+      font-size: 93.75%;
+    }
+}
+
+@media (max-width: 736px) {
+    html {
+      font-size: 87.5%;
+    }
+}
 
 * {
     margin: 0;

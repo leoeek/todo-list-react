@@ -1,5 +1,5 @@
 import { Trash, Circle, CheckCircle } from 'phosphor-react';
-import { useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 
 import styles from './Styles.module.css'
 
