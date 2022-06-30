@@ -1,0 +1,50 @@
+.container {
+    max-width: 736px;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+
+.resume {
+    display: flex;   
+    width: 100%; 
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.875rem;
+    font-weight: 700;
+    padding-bottom: 1.8rem;
+}
+
+.resume__created {
+    color: var(--blue-100);
+}
+
+.resume__finished {
+    color: var(--purple-100);
+}
+
+.resume__total {
+    font-size: 0.75rem;
+    background-color: var(--gray-400);
+    border-radius: 40%;
+    padding: 0.1rem 0.3rem;    
+    margin-left: 0.3rem;
+    color: var(--gray-200);
+}
+
+.box_todo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 244px;    
+    font-size: 1rem;
+
+    border-top: 1px solid var(--gray-400);
+    border-radius: 8px;
+}
+
+.box_todo__empty {
+    margin-top: 1.3rem;
+    color: var(--gray-300);
+}

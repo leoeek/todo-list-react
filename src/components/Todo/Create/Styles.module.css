@@ -1,0 +1,30 @@
+.formTodo {
+    width: 736px;
+    height: 54px;
+    display: flex;
+    justify-content: space-between;       
+}
+
+.fixed {
+    position: absolute;
+    bottom: -25px;
+}
+
+.formTodo input {
+    background-color: var(--gray-500);
+    border: 1px solid var(--gray-700);
+    color: var(--white);
+    flex: 1;
+    margin-right: 6px;
+    border-radius: 8px;
+    padding: 16px;
+}
+
+.formTodo button {
+    width: 90px;    
+    height: 100%;
+    background-color: var(--blue-500);
+    border: 0;
+    border-radius: 10px;
+    color: var(--white);
+}
