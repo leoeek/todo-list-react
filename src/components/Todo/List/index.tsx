@@ -1,35 +1,19 @@
-import { useCallback, useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import clipboard from '../../../assets/clipboard.svg'
-import { AppContext } from '../../../context';
+import { useTodo } from '../../../hooks/useTodo';
 import { Item } from '../Item';
 import styles from './Styles.module.css'
 
 export function List () {
-    const { todos, setData } = useContext(AppContext)    
+
+    const { todos, getCountDone } = useTodo()
 
     const [countCreated, setCountCreated] = useState(0)
     const [countDone, setCountDone] = useState(0)
 
-    const handleDone = (uid: string) => {
-        const listTodos = todos
-        const i = listTodos.findIndex(item => item.uid === uid)
-        listTodos[i].done = !listTodos[i].done
-
-        setData(listTodos)
-    }
-    
-    const handleRemove = (uid: string) => {
-        const newList = todos.filter((todo) => todo.uid !== uid)
-        setData([...newList])
-    }
-
-    const getCountDone = () => {
-        return todos.filter((todo) => todo.done == true).length
-    }
-
     useEffect(() => {
-        setCountCreated(todos.length)
-        setCountDone(getCountDone())
+        setCountCreated(todos?.length)
+        setCountDone(getCountDone)
     }, [todos])
 
     return (
@@ -39,7 +23,7 @@ export function List () {
                 <p className={styles.resume__finished}>Concluídas <span className={styles.resume__total}>{ countDone }</span></p>
             </section>    
 
-            {todos.length === 0 ? (
+            {countCreated === 0 ? (
                 <section className={styles.box_todo}>
                     <img src={clipboard} />
 
@@ -53,9 +37,7 @@ export function List () {
                                 key={todo.uid}
                                 task={todo.task} 
                                 uid={todo.uid} 
-                                done={todo.done}
-                                handleDone={handleDone}
-                                handleRemove={handleRemove}
+                                done={todo.done}                                
                             />
                 })
             )}   

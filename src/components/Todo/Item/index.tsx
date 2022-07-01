@@ -1,5 +1,6 @@
 import { Trash, Circle, CheckCircle } from 'phosphor-react';
 import { useCallback } from 'react';
+import { useTodo } from '../../../hooks/useTodo';
 
 import styles from './Styles.module.css'
 
@@ -7,11 +8,11 @@ interface ITodo {
     uid: string;
     task: string;
     done: boolean;
-    handleDone: Function;
-    handleRemove: Function;
 }
 
-export function Item ({ uid, task, done, handleDone, handleRemove }: ITodo) {
+export function Item ({ uid, task, done }: ITodo) {
+
+    const { remove, toggle } = useTodo()
 
     const checkbox = useCallback((done: boolean) => {
         return done ? <CheckCircle size={23} /> : <Circle size={23} />
@@ -22,7 +23,7 @@ export function Item ({ uid, task, done, handleDone, handleRemove }: ITodo) {
             <button 
                 className={styles.todo__item_check}
                 title="Marcar como concluída"
-                onClick={() => handleDone(uid)}
+                onClick={() => toggle(uid)}
             >
                 { checkbox(done) }
             </button>
@@ -34,7 +35,7 @@ export function Item ({ uid, task, done, handleDone, handleRemove }: ITodo) {
             <button 
                 className={styles.todo__item_remove}
                 title="Remover tarefa"
-                onClick={() => handleRemove(uid)}
+                onClick={() => remove(uid)}
             >
                 <Trash size={20} />
             </button>

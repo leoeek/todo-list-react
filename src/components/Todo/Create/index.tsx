@@ -1,42 +1,26 @@
-import { useContext, useState } from "react"
-import { AppContext } from "../../../context"
+import { useCallback, useContext, useState } from "react"
+import { useTodo } from "../../../hooks/useTodo";
 
 import styles from "./Styles.module.css"
-
 interface ITodoProps {
     fixed: boolean
 }
 
-interface ITodo {
-    uid: string;
-    task: string;
-    done: boolean;
-}
-
 export function CreateTodo ({ fixed }: ITodoProps) {
 
-    const { todos, setData } = useContext(AppContext)
+    const { create } = useTodo()
     const [newTodo, setNewTodo] = useState('')
 
     const handleChangeTodo = function (event: React.ChangeEvent<HTMLInputElement>) {
         setNewTodo(event?.target.value)        
     }
 
-    const handleCreate = function () {
+    const handleCreate = useCallback(() => {
         event?.preventDefault()
 
-        const todo: ITodo = {
-            uid: new Date().toISOString(),
-            task: newTodo,
-            done: false
-        }
-
+        create(newTodo)
         setNewTodo('')
-        const listTodos = todos
-        listTodos.push(todo)
-
-        setData(listTodos)
-    }
+    }, [newTodo, create])
 
     return (
         <form 

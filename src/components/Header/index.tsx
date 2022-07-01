@@ -1,5 +1,5 @@
-import logo from '../../assets/logo.svg'
 import { CreateTodo } from '../Todo/Create'
+import logo from '../../assets/logo.svg'
 
 import styles from "./Styles.module.css"
 
