@@ -1,4 +1,5 @@
-import { useCallback, useContext, useState } from "react"
+import { useCallback, useState } from "react"
+import { useTodoContext } from "../../../context/Todo";
 import { useTodo } from "../../../hooks/useTodo";
 
 import styles from "./Styles.module.css"
@@ -8,7 +9,9 @@ interface ITodoProps {
 
 export function CreateTodo ({ fixed }: ITodoProps) {
 
-    const { create } = useTodo()
+    const { setTodos, todos } = useTodoContext()
+    const {create } = useTodo({ todos, setTodos })
+
     const [newTodo, setNewTodo] = useState('')
 
     const handleChangeTodo = function (event: React.ChangeEvent<HTMLInputElement>) {

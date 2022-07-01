@@ -1,12 +1,14 @@
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import clipboard from '../../../assets/clipboard.svg'
+import { useTodoContext } from '../../../context/Todo';
 import { useTodo } from '../../../hooks/useTodo';
 import { Item } from '../Item';
 import styles from './Styles.module.css'
 
 export function List () {
 
-    const { todos, getCountDone } = useTodo()
+    const { todos, setTodos } = useTodoContext();
+    const { getCountDone } = useTodo({ todos, setTodos })
 
     const [countCreated, setCountCreated] = useState(0)
     const [countDone, setCountDone] = useState(0)

@@ -1,62 +1,25 @@
-import { createContext, ReactNode, useCallback, useState } from 'react'
+import { createContext, Dispatch, ReactNode, SetStateAction, useContext, useState } from 'react'
+import { ITodo } from '../../types/ITodo';
 
-interface ITodoServiceProps {
+interface ITodoProviderProps {
     children: ReactNode
 }
-
-interface ITodo {
-    uid: string;
-    task: string;
-    done: boolean;
-}
-
 export interface ITodoReturn {
     todos: ITodo[];
-    getCountDone: number;    
-    remove: (uid: string) => void;
-    toggle: (uid: string) => void;
-    create: (task: string) => void;
+    setTodos: Dispatch<SetStateAction<ITodo[]>>;
 }
 
 export const TodoContext = createContext<ITodoReturn>(
     {} as ITodoReturn
 )
 
-export function TodoService ({ children }: ITodoServiceProps) {
+export function TodoProvider ({ children }: ITodoProviderProps) {
     const [todos, setTodos] = useState<ITodo[]>([])
-
-    const getCountDone = todos.filter((todo) => todo.done == true).length
-
-    const remove = (uid: string) => {
-        const newList = todos.filter((todo) => todo.uid !== uid)
-        setTodos([...newList])
-    }
-
-    const toggle = (uid: string) => {
-        const listTodos = todos
-        const i = listTodos.findIndex(item => item.uid === uid)
-        listTodos[i].done = !listTodos[i].done        
-
-        setTodos([...listTodos])
-    }
-
-    const create = (task: string) => {
-        console.log('aquiveio')
-        const todo: ITodo = {
-            uid: new Date().toISOString(),
-            task: task,
-            done: false,
-        }
-        
-        const allTodos = [...todos, todo]
-        setTodos(allTodos)
-    }
 
     return <TodoContext.Provider value={{
         todos,
-        getCountDone,
-        remove,
-        toggle,
-        create
+        setTodos,
     }}>{ children }</TodoContext.Provider>
 }
+
+export const useTodoContext = () => useContext(TodoContext)

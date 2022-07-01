@@ -1,10 +1,10 @@
 import { ReactNode } from 'react'
-import { TodoService } from './Todo';
+import { TodoProvider } from './Todo';
 
 interface IProviderProps {
     children: ReactNode;
 }
 
 export function AppProvider ({ children }: IProviderProps) {
-    return <TodoService>{ children }</TodoService>
+    return <TodoProvider>{ children }</TodoProvider>
 }

@@ -1,5 +1,6 @@
 import { Trash, Circle, CheckCircle } from 'phosphor-react';
-import { useCallback } from 'react';
+import { useCallback, useContext } from 'react';
+import { useTodoContext } from '../../../context/Todo';
 import { useTodo } from '../../../hooks/useTodo';
 
 import styles from './Styles.module.css'
@@ -12,7 +13,8 @@ interface ITodo {
 
 export function Item ({ uid, task, done }: ITodo) {
 
-    const { remove, toggle } = useTodo()
+    const { todos, setTodos } = useTodoContext()
+    const { remove, toggle } = useTodo({ todos, setTodos })
 
     const checkbox = useCallback((done: boolean) => {
         return done ? <CheckCircle size={23} /> : <Circle size={23} />
